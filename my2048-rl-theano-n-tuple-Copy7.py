@@ -94,10 +94,10 @@ def get_grid(driver):
 	return grid
 
 
-import matplotlib
-import matplotlib.pyplot as plt
-
-matplotlib.rcParams['figure.figsize'] = (12.0, 8.0)
+# import matplotlib
+# import matplotlib.pyplot as plt
+#
+# matplotlib.rcParams['figure.figsize'] = (12.0, 8.0)
 
 import time
 
@@ -164,36 +164,36 @@ def gen_sample_and_learn(driver):
 		last_grid = best_grid
 		if not board_list:
 			break
-		plt.pause(0.05)
+		# plt.pause(0.05)
 	return game_len, grid_array.max(), game_score
 
 
 results = []
 driver = webdriver.Firefox()
-graph = plt.plot([], [], 'b')[0]
-dots256 = plt.plot([], [], 'ro')[0]
-dots512 = plt.plot([], [], 'yo')[0]
-dots1024 = plt.plot([], [], 'go')[0]
-plt.xlim((0, 100))
-plt.ylim((0, 25000))
+# graph = plt.plot([], [], 'b')[0]
+# dots256 = plt.plot([], [], 'ro')[0]
+# dots512 = plt.plot([], [], 'yo')[0]
+# dots1024 = plt.plot([], [], 'go')[0]
+# plt.xlim((0, 100))
+# plt.ylim((0, 25000))
 for j in range(200):
 	driver.get("https://gabrielecirulli.github.io/2048/")
 	time.sleep(2)
 	result = gen_sample_and_learn(driver)
 	print(j, result)
 	results.append(result)
-	graph.set_data(np.arange(len(results)), np.array(results)[:, 2])
+	# graph.set_data(np.arange(len(results)), np.array(results)[:, 2])
 	dots_data = [[], [], []]
 	for i, d in enumerate(results):
 		c = 0 if d[1] <= 256 else (1 if d[1] == 512 else 2)
 		dots_data[c].append([i, d[2]])
-	dots_graph = [dots256, dots512, dots1024]
-	for i in range(3):
-		if dots_data[i]:
-			xy = np.array(dots_data[i])
-			dots_graph[i].set_data(xy[:, 0], xy[:, 1])
-	plt.title("Game #%d" % j, fontsize=64)
-	plt.draw()
-	plt.pause(3)
+	# dots_graph = [dots256, dots512, dots1024]
+	# for i in range(3):
+	# 	if dots_data[i]:
+	# 		xy = np.array(dots_data[i])
+			# dots_graph[i].set_data(xy[:, 0], xy[:, 1])
+	# plt.title("Game #%d" % j, fontsize=64)
+	# plt.draw()
+	# plt.pause(3)
 	if result[1] >= 2048:
 		break
