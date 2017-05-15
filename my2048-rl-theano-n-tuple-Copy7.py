@@ -81,11 +81,6 @@ def make_input(grid):
 logf = open("logf-rl-theano-n-tuple-6", "w")
 
 
-def printx(*a, **kw):
-	print(*a, file=logf, flush=True, **kw)
-	print(*a, flush=True, **kw)
-
-
 def get_grid(driver):
 	grid = np.zeros(shape=(4, 4), dtype='uint16')
 	for x in driver.find_elements_by_class_name('tile'):
